@@ -1,61 +1,87 @@
-# Aave V2 Wallet Credit Scoring System
+# 🧠 Aave V2 Wallet Credit Scoring
 
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-An unsupervised machine learning pipeline that generates credit scores (0-1000) for Ethereum wallets based on their transaction history in Aave V2.
+An unsupervised machine learning pipeline that assigns credit scores (ranging from 0 to 1000) to Ethereum wallets based on their Aave V2 transaction history. This project helps identify wallet behavior patterns such as liquidations, borrowing activity, and financial responsibility without needing labeled training data.
+
+---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.8+
-- pip
+### ✅ Prerequisites
 
-### Installation
+- Python 3.8+
+- `pip` package manager
+- A JSON file containing Aave V2 wallet transaction data
+
+### 🔧 Installation
+
 ```bash
 git clone https://github.com/your-username/aave-credit-scoring.git
 cd aave-credit-scoring
 pip install -r requirements.txt
-Usage
-Add your transaction data as src/data/transactions.json
+📂 Add Your Data
+Place your Aave V2 transaction data inside:
 
-Run the scoring pipeline:
+bash
+src/data/transactions.json
+
+▶️ Usage
+
+Run the pipeline using:
 
 bash
 python src/main.py
+
+This will generate features, apply the ML model, and export credit scores with visual analysis.
+
 📊 Outputs
 File	Description
-src/outputs/wallet_scores.csv	All wallet addresses with credit scores
-src/outputs/score_distribution.png	Visual histogram of scores
-analysis.md	Detailed report with insights
+src/outputs/wallet_scores.csv	Wallet addresses with their credit scores
+src/outputs/score_distribution.png	Histogram of the credit score distribution
+analysis.md	Auto-generated report with observations
+
+
 📈 Score Interpretation
-Score	Risk Level	Typical Behavior
-900-1000	Excellent	Consistent deposits, rare liquidations
-700-900	Good	Occasional borrowing, healthy ratios
-400-700	Moderate	Some liquidation history
-0-400	High Risk	Bot-like patterns, frequent liquidations
+Score Range	Risk Level	Wallet Behavior
+900 - 1000	Excellent	Active, stable, rarely liquidated
+700 - 900	Good	Moderate borrowing, healthy ratios
+400 - 700	Moderate	Some liquidation or irregular activity
+0 - 400	High Risk	Frequent liquidation, bot-like behavior
+
 🏗️ Project Structure
-text
-.
 ├── src/
-│   ├── data/               # Raw transaction data
+│   ├── data/               # Input: Raw transaction data
 │   ├── models/             # Saved ML models
-│   ├── outputs/            # Generated scores
-│   ├── main.py             # Main pipeline
-│   ├── features.py         # Feature engineering
-│   └── model.py           # ML model code
-├── analysis.md            # Auto-generated report
-├── requirements.txt       # Dependencies
-└── README.md             # This file
-📝 Methodology
-Data: 100K raw Aave V2 transactions
+│   ├── outputs/            # Generated scores and visualizations
+│   ├── main.py             # Main pipeline entry point
+│   ├── features.py         # Feature engineering logic
+│   ├── model.py            # ML model definition
+│   └── analysis.py         # Post-processing and insights
+├── analysis.md             # Auto-generated analysis report
+├── requirements.txt        # Python dependencies
+└── README.md               # Project documentation
 
-Features: 15+ metrics including:
 
-Transaction frequency
+🧪 Methodology
+Data: ~100K Aave V2 transactions
 
-Financial ratios
+Feature Engineering:
 
-Liquidation history
+Wallet activity over time
 
-Behavioral patterns
+Borrow-to-collateral ratios
 
-Model: Isolation Forest (unsupervised anomaly detection)
+Number and size of liquidations
+
+Behavioral consistency
+
+Model:
+
+Isolation Forest (unsupervised anomaly detection)
+
+Score scaled from 0 to 1000 based on anomaly level
+
+📄 License
+This project is licensed under the MIT License.
